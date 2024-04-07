@@ -73,19 +73,6 @@
 (comment
 
   (def mypage (from-slug "scicloj-curmap-draft"))
-
-  (content-html-fresh? mypage)
-
-  (fs/modified-since (content-html-file mypage)
-                     [(fs/file "page-generator-version.txt")])
-
-  (fs/last-modified-time (content-html-file mypage))
-  ;; => #object[java.nio.file.attribute.FileTime 0x59e639b8 "2024-04-07T15:23:58.426474435Z"]
-
-  (fs/last-modified-time (fs/file "page-generator-version.txt"))
-  ;; => #object[java.nio.file.attribute.FileTime 0x57b44f9 "2024-04-07T15:24:31.385074815Z"]
-
-
   mypage
 
   (rebuild! mypage)
@@ -93,55 +80,6 @@
 
   (has-content-markdown? mypage)
 
-
-
-  :rcf)
-
-(comment
-  (content-html-fresh? (from-edn-file (first (fs/glob "." "*/page.edn")))))
-
-
-(comment
-
-  (def f "file.txt")
-
-  (spit f (str "A number: " (rand)))
-
-  (fs/last-modified-time f)
-  ;; => #object[java.nio.file.attribute.FileTime 0x4fdb7fc "2024-04-07T15:38:21.857339182Z"]
-
-  (spit f (str "A number: " (rand)))
-
-  (fs/last-modified-time f)
-  ;; => #object[java.nio.file.attribute.FileTime 0x55da8faa "2024-04-07T15:39:07.135860486Z"]
-
-  ;; writes if it changes.
-  ;; OK.
-
-  ;; but what if it does not change?
-
-  ;; is my operating system messing this up or what?
-
-  (def f2 "file2.txt")
-  (def content2 "file twwwooooo")
-
-  (spit f2 content2)
-
-  (fs/last-modified-time f2)
-  ;; => #object[java.nio.file.attribute.FileTime 0x4c1613e1 "2024-04-07T15:40:43.791278077Z"]
-
-  ;; now, do it again.
-
-  (spit f2 content2)
-  (fs/last-modified-time f2)
-  ;; => #object[java.nio.file.attribute.FileTime 0x7609ffe "2024-04-07T15:41:13.065802269Z"]
-
-  ;; and again.
-  (spit f2 content2)
-  (fs/last-modified-time f2)
-  ;; => #object[java.nio.file.attribute.FileTime 0x365a2bc7 "2024-04-07T15:41:45.390311086Z"]
-
-  ;; this time i'm unable to reproduce.
-  ;; this is weird.
+  (content-html-fresh? mypage)
 
   :rcf)
