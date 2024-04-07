@@ -35,17 +35,27 @@
 
 (comment
   (pages)
-  (page/doc-markdown (first (pages)))
-
-
+  (page/content-markdown (first (pages)))
   )
 
 (defn rebuild-index! []
   (spit "index.html"
         (hiccup.page/html5 (ui/index {}))))
 
+(comment
+  (rebuild-index!))
+
+(comment
+  (def p (first (pages)))
+
+  (page/content-markdown p)
+
+  :rcf)
+
 (defn rebuild-page! [page]
-  )
+  (let [status (page/rebuild! page)]
+    (when (= status ::page/page-rebuild-complete)
+      (println "Rebuilt" (page/slug page)))))
 
 (defn rebuild!
   "Rebuilds everything -- no caching behavior."
@@ -55,9 +65,9 @@
     (rebuild-page! page)))
 
 (defn clean! []
-  (let [build-artifacts #{"index.html"}]
-    (doseq [f build-artifacts]
-      (fs/delete-if-exists f))))
+  (fs/delete-if-exists "index.html")
+  (doseq [page (pages)]
+    (fs/delete-if-exists (page/content-html-file page))))
 
 (comment
   (rebuild!)
