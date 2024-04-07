@@ -37,7 +37,7 @@
   selmer/selmer {:mvn/version "1.12.59"}
 
   ;; our own dependencies:
-  #_ "TODO"
+  com.hyperfiddle/rcf {:mvn/version "20220926-202227"}
   }
  :aliases
  {:test {:extra-deps {lambdaisland/kaocha {:mvn/version "1.88.1376"}}
