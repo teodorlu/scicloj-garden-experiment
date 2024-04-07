@@ -6,27 +6,35 @@
    [teodorlu.scicloj-garden.ui :as ui]))
 
 (deftest pandoc->hiccup-test--string
-  (testing "Pandoc strings are strings in hiccup"
-    ;; (pandoc/from-markdown "hei")
-    (let [pandoc
-          {:pandoc-api-version [1 23 1],
-           :meta {},
-           :blocks [{:t "Para", :c [{:t "Str", :c "hei"}]}]}]
-      (is (= (list [:p "hei"])
-             (ui/pandoc->hiccup pandoc))))))
+  ;; (pandoc/from-markdown "hei")
+  (let [pandoc
+        {:pandoc-api-version [1 23 1],
+         :meta {},
+         :blocks [{:t "Para", :c [{:t "Str", :c "hei"}]}]}]
+    (is (= (list [:p "hei"])
+           (ui/pandoc->hiccup pandoc)))))
 
 (deftest pandoc->hiccup-test--with-space
-  (testing "Spaces in pandoc strings are spaces in hiccup"
-    ;; (pandoc/from-markdown "hei _du_")
-    (let [pandoc
-          {:pandoc-api-version [1 23 1],
-           :meta {},
-           :blocks
-           [{:t "Para",
-             :c
-             [{:t "Str", :c "hei"} {:t "Space"} {:t "Emph", :c [{:t "Str", :c "du"}]}]}]}]
-      (is (= (list [:p "hei" " " [:em "du"]])
-             (ui/pandoc->hiccup pandoc))))))
+  ;; (pandoc/from-markdown "hei _du_")
+  (let [pandoc
+        {:pandoc-api-version [1 23 1],
+         :meta {},
+         :blocks
+         [{:t "Para", :c [{:t "Str", :c "hei"} {:t "Space"} {:t "Str", :c "du"}]}]}]
+    (is (= (list [:p "hei" " " "du"])
+           (ui/pandoc->hiccup pandoc)))))
+
+(deftest pandoc->hiccup-test--with-space-and-emphasis
+  ;; (pandoc/from-markdown "hei _du_")
+  (let [pandoc
+        {:pandoc-api-version [1 23 1],
+         :meta {},
+         :blocks
+         [{:t "Para",
+           :c
+           [{:t "Str", :c "hei"} {:t "Space"} {:t "Emph", :c [{:t "Str", :c "du"}]}]}]}]
+    (is (= (list [:p "hei" " " [:em "du"]])
+           (ui/pandoc->hiccup pandoc)))))
 
 (comment
   (ui/pandoc->hiccup (pandoc/from-markdown "hei _du_"))
