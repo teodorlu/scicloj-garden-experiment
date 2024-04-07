@@ -39,6 +39,9 @@ This repository is an attempt to be that home.
 - The repo contains its own code for working with the hypertext documents
   - The code is written in Clojure
   - And the code runs on JVM Clojure + Babashka where possible.
+- Markdown parser: Pandoc, nextjournal/markdown or something else?
+  - Per 2024-04-07, Teodor isn't sure.
+  - Safe first step is probably to use Pandoc, since Teodor knows Pandoc better than the alternatives.
 
 ## Proposed first steps
 
