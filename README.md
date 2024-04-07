@@ -1,3 +1,5 @@
+**⚠️ THIS PROJECT IS HIGHLY EXPERIMENTAL, PROCEED AT YOUR OWN RISK ⚠️**
+
 # Scicloj knowledge garden: a memex?
 
 This repo attempts to build a knowledge garden for scicloj out of hypertext, clojure and markdown.
