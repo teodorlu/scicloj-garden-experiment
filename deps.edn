@@ -38,4 +38,7 @@
 
   ;; our own dependencies:
   #_ "TODO"
-  }}
+  }
+ :aliases
+ {:test {:extra-deps {lambdaisland/kaocha {:mvn/version "1.88.1376"}}
+         :main-opts ["-m" "kaocha.runner"]}}}
