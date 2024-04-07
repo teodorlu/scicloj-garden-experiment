@@ -1,4 +1,6 @@
-(ns teodorlu.scicloj-garden.step1)
+(ns teodorlu.scicloj-garden.step1
+  (:require
+   [teodorlu.scicloj-garden.ui :as ui]))
 
 ;; no organization just yet, just try to get started
 ;; not get stuck in analysis paralysis
@@ -16,3 +18,5 @@
 ;;   - Pure babashka / JVM
 ;;   - Avoid rework (when possible)
 ;; - Avoid using Pandoc for the IR to HTML step
+
+(ui/index {})
