@@ -41,7 +41,20 @@ This repository is an attempt to be that home.
   - And the code runs on JVM Clojure + Babashka where possible.
 - Markdown parser: Pandoc, nextjournal/markdown or something else?
   - Per 2024-04-07, Teodor isn't sure.
-  - Safe first step is probably to use Pandoc, since Teodor knows Pandoc better than the alternatives.
+  - Does nextjournal/markdown support babashka?
+    - nextjournal/markdown is about 3x faster than shelling out to pandoc, according to some rough benchmarking by Teodor (when run from a JVM).
+      - The advantage for nextjournal/markdown is largest for smaller documents, where process spawning and pandoc initialization has a bigger impact.
+    - Teodor does not know
+  - Teodor has the most experience with Pandoc
+  - What about [Quarto]?
+    - Teodor isn't sure
+    - Does it bring any benefits?
+  - For now, Pandoc is probably a good place to start.
+
+[nextjournal/markdown]: https://github.com/nextjournal/markdown/
+[Quarto]: https://quarto.org/
+[Pandoc]: https://pandoc.org/
+[Babashka]: https://babashka.org/
 
 ## Proposed first steps
 
@@ -70,3 +83,14 @@ Where a book can be written, and then be completed, a memex is built to grow con
 Where a book has a release date, and perhaps a second release, a memex is built to accrede knowledge in time.
 
 In other words Teodor believes, Kira's book and other structured attemps at making the Clojure data science ecosystem more discoverable are purely synergetic with a scicloj knowledge garden.
+
+## Places where we can steal ideas
+
+- Wikipedia
+  - Information structure
+  - Mix between data (wikidata) and hypertext (wikipedia)
+  - Contribution model
+- Knowledge work on Twitter
+  - Start with visa's ideas: https://twitter.com/FANswitchboard (optionally also https://twitter.com/visakanv)
+- Tana as a tool for personal knowledge management (PKM) and collective knowledge management (CKM)
+  - https://tana.inc/
