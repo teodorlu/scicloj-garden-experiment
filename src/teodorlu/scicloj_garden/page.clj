@@ -16,9 +16,12 @@
 ;; if the content is given in markdown, the content is stored in index.md.
 ;; if the content is given in html, the content is stored in index.html.
 
-(defn edn-file->page [edn-file]
+(defn from-edn-file [edn-file]
   (assoc (edn/read-string (slurp (fs/file edn-file)))
          :page/slug (str (fs/parent edn-file))))
+
+(defn from-slug [slug]
+  (from-edn-file (fs/file slug "page.edn")))
 
 (defn slug [page]
   (:page/slug page))
@@ -50,9 +53,9 @@
 (defn content-html-fresh? [page]
   (and (has-content-markdown? page)
        (has-content-html? page)
-       (seq (fs/modified-since (content-html-file page)
-                               (set (content-markdown-file page))))))
-
+       (empty? (fs/modified-since (content-html-file page)
+                                  [(content-markdown-file page)
+                                   (fs/file "page-generator-version.txt")]))))
 
 (defn force-rebuild! [page]
   (when (has-content-markdown? page)
@@ -68,4 +71,24 @@
     (force-rebuild! page)))
 
 (comment
-  (content-html-fresh? (edn-file->page (first (fs/glob "." "*/page.edn")))))
+
+  (def mypage (from-slug "scicloj-curmap-draft"))
+
+  (content-html-fresh? mypage)
+
+  (fs/modified-since (content-html-file mypage)
+                     (fs/file "page-generator-version.txt"))
+
+  mypage
+
+  (rebuild! mypage)
+  (force-rebuild! mypage)
+
+  (has-content-markdown? mypage)
+
+
+
+  :rcf)
+
+(comment
+  (content-html-fresh? (from-edn-file (first (fs/glob "." "*/page.edn")))))

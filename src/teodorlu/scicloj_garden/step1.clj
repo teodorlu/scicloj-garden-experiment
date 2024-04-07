@@ -31,7 +31,7 @@
   "Traverse the files to find the pages"
   []
   (->> (fs/glob "." "**/page.edn")
-       (map page/edn-file->page)))
+       (map page/from-edn-file)))
 
 (comment
   (pages)
@@ -72,5 +72,8 @@
 (comment
   (rebuild!)
   (clean!)
+
+  (:page/slug (first (pages)))
+  ;; => "scicloj-curmap-draft"
 
   :rcf)
