@@ -1,9 +1,10 @@
-(ns teodorlu.scicloj-garden.ui)
+(ns teodorlu.scicloj-garden.ui
+  (:require
+   [teodorlu.scicloj-garden.page :as page]))
 
 (defn page-list-item [page]
-  (let [slug (:page/slug page)]
-    [:li [:a {:href (str "/" slug "/")}
-          slug]]))
+  [:li [:a {:href (str "/" (page/slug page)"/")}
+        (page/slug page)]])
 
 (defn index [{:keys [pages]}]
   (let [title "Scicloj knowledge garden: a memex?"]
