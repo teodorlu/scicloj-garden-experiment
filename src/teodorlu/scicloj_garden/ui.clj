@@ -17,7 +17,7 @@
        [:a {:href "https://github.com/teodorlu/scicloj-garden-experiment"}
         "github.com/teodorlu/scicloj-garden-experiment"]]
       [:p "Pages:"]
-      [:ul (for [p (sort-by :slug pages)]
+      [:ul (for [p (sort-by page/slug pages)]
              (page-list-item p))]])))
 
 (defn pandoc-el->hiccup [el]
