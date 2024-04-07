@@ -39,3 +39,31 @@ This repository is an attempt to be that home.
 - The repo contains its own code for working with the hypertext documents
   - The code is written in Clojure
   - And the code runs on JVM Clojure + Babashka where possible.
+
+## Proposed first steps
+
+Figuring out where to start can be hard!
+Let's make something useful as quickly as possible, to avoid getting stuck in theoretical memex design.
+
+Here's a proposal:
+
+1. Actually make a curriculum map for Clojure data science
+2. Build the curriculum map out of hypertext: each thing to learn refers to where one can learn that thing
+3. Gradually extend the scope to serve as an index of Clojure data science content
+4. When there's too much content for _one list of things_, start making tables / focused views that view specific aspects.
+   - Either automatically as programs that read metadata and generate tables
+   - Or manually as people who solve a problem by referring to where one needs to read, and what one needs to learn.
+
+Teodor believes "make a curriculum" is a good start because it's a _complete_ goal.
+
+## What about Kira's book and other attempts?
+
+Teodor believes that there's no reason not to do _multiple_ initiatives for this.
+Also, a book is way more cohesive than a memex.
+A book has a _reading order_, which is amazing for the reader.
+A memex is more loosely coupled, in a permanent state of work-in-progress.
+
+Where a book can be written, and then be completed, a memex is built to grow continuously.
+Where a book has a release date, and perhaps a second release, a memex is built to accrede knowledge in time.
+
+In other words Teodor believes, Kira's book and other structured attemps at making the Clojure data science ecosystem more discoverable are purely synergetic with a scicloj knowledge garden.
