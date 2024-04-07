@@ -50,53 +50,44 @@
     (is (= (list [:h1 "a" " " "heading"])
            (ui/pandoc->hiccup pandoc)))))
 
-
-
-(comment
-  (ui/pandoc->hiccup (pandoc/from-markdown "hei _du_"))
-  ;; generate test data
-
-  (def sample-markdown (str/trim "
+(deftest pandoc->hiccup-test--whole-doc
+  #_ (pandoc/from-markdown "
 # Scicloj curriculum map (draft, experimental)
 
 A paragraph.
 
 A paragraph with _italic text_.
-"))
-
-  (def sample-pandoc (pandoc/from-markdown sample-markdown))
-
-  sample-pandoc
-  {:pandoc-api-version [1 23 1],
-   :meta {},
-   :blocks
-   [{:t "Header",
-     :c
-     [1
-      ["scicloj-curriculum-map-draft-experimental" [] []]
-      [{:t "Str", :c "Scicloj"}
-       {:t "Space"}
-       {:t "Str", :c "curriculum"}
-       {:t "Space"}
-       {:t "Str", :c "map"}
-       {:t "Space"}
-       {:t "Str", :c "(draft,"}
-       {:t "Space"}
-       {:t "Str", :c "experimental)"}]]}
-    {:t "Para", :c [{:t "Str", :c "A"} {:t "Space"} {:t "Str", :c "paragraph."}]}
-    {:t "Para",
-     :c
-     [{:t "Str", :c "A"}
-      {:t "Space"}
-      {:t "Str", :c "paragraph"}
-      {:t "Space"}
-      {:t "Str", :c "with"}
-      {:t "Space"}
-      {:t "Emph",
-       :c [{:t "Str", :c "italic"} {:t "Space"} {:t "Str", :c "text"}]}
-      {:t "Str", :c "."}]}]}
-
-
-
-
-  )
+")
+  (let [pandoc
+        {:pandoc-api-version [1 23 1],
+         :meta {},
+         :blocks
+         [{:t "Header",
+           :c
+           [1
+            ["scicloj-curriculum-map-draft-experimental" [] []]
+            [{:t "Str", :c "Scicloj"}
+             {:t "Space"}
+             {:t "Str", :c "curriculum"}
+             {:t "Space"}
+             {:t "Str", :c "map"}
+             {:t "Space"}
+             {:t "Str", :c "(draft,"}
+             {:t "Space"}
+             {:t "Str", :c "experimental)"}]]}
+          {:t "Para", :c [{:t "Str", :c "A"} {:t "Space"} {:t "Str", :c "paragraph."}]}
+          {:t "Para",
+           :c
+           [{:t "Str", :c "A"}
+            {:t "Space"}
+            {:t "Str", :c "paragraph"}
+            {:t "Space"}
+            {:t "Str", :c "with"}
+            {:t "Space"}
+            {:t "Emph",
+             :c [{:t "Str", :c "italic"} {:t "Space"} {:t "Str", :c "text"}]}
+            {:t "Str", :c "."}]}]}]
+    (is (= (list [:h1 "Scicloj" " " "curriculum" " " "map" " " "(draft," " " "experimental)"]
+                 [:p "A" " " "paragraph."]
+                 [:p "A" " " "paragraph" " " "with" " " [:em "italic" " " "text"] "."])
+           (ui/pandoc->hiccup pandoc)))))

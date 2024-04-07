@@ -32,4 +32,4 @@
         :else nil))
 
 (defn pandoc->hiccup [pandoc]
-  (into (list) (map pandoc-el->hiccup (:blocks pandoc))))
+  (apply list (map pandoc-el->hiccup (:blocks pandoc))))
