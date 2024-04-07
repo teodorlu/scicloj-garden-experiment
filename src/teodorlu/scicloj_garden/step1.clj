@@ -40,7 +40,7 @@
 
 (defn rebuild-index! []
   (spit "index.html"
-        (hiccup.page/html5 (ui/index {}))))
+        (hiccup.page/html5 (ui/index {:pages (pages)}))))
 
 (comment
   (rebuild-index!))

@@ -6,6 +6,12 @@
    [teodorlu.bbmemex.pandoc :as pandoc]
    [teodorlu.scicloj-garden.ui :as ui]))
 
+;; TODO
+;;
+;; Split this into `page` and `page-loader`.
+;; `page-loader` depends on `page`.
+;; `page` is domain only.
+
 ;; terminology
 ;;
 ;; a PAGE has a slug and an UUID.

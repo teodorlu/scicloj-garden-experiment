@@ -1,6 +1,11 @@
 (ns teodorlu.scicloj-garden.ui)
 
-(defn index [{}]
+(defn page-list-item [page]
+  (let [slug (:page/slug page)]
+    [:li [:a {:href (str "/" slug "/")}
+          slug]]))
+
+(defn index [{:keys [pages]}]
   (let [title "Scicloj knowledge garden: a memex?"]
     (list
      [:head [:title title]]
@@ -9,7 +14,10 @@
       [:p "We'll see!"]
       [:p "Source: "
        [:a {:href "https://github.com/teodorlu/scicloj-garden-experiment"}
-        "github.com/teodorlu/scicloj-garden-experiment"]]])))
+        "github.com/teodorlu/scicloj-garden-experiment"]]
+      [:p "Pages:"]
+      [:ul (for [p (sort-by :slug pages)]
+             (page-list-item p))]])))
 
 (defn pandoc-el->hiccup [el]
   (cond (= "Para" (:t el))
