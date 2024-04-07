@@ -2,6 +2,7 @@
   (:require
    [babashka.fs :as fs]
    [hiccup.page]
+   [teodorlu.scicloj-garden.page-loader :as page-loader]
    [teodorlu.scicloj-garden.page :as page]
    [teodorlu.scicloj-garden.ui :as ui]))
 
@@ -31,11 +32,11 @@
   "Traverse the files to find the pages"
   []
   (->> (fs/glob "." "**/page.edn")
-       (map page/from-edn-file)))
+       (map page-loader/from-edn-file)))
 
 (comment
   (pages)
-  (page/content-markdown (first (pages)))
+  (page-loader/content-markdown (first (pages)))
   )
 
 (defn rebuild-index! []
@@ -48,13 +49,13 @@
 (comment
   (def p (first (pages)))
 
-  (page/content-markdown p)
+  (page-loader/content-markdown p)
 
   :rcf)
 
 (defn rebuild-page! [page]
-  (let [status (page/rebuild! page)]
-    (when (= status ::page/page-rebuild-complete)
+  (let [status (page-loader/rebuild! page)]
+    (when (= status ::page-loader/page-rebuild-complete)
       (println "Rebuilt" (page/slug page)))))
 
 (defn rebuild!
@@ -67,7 +68,7 @@
 (defn clean! []
   (fs/delete-if-exists "index.html")
   (doseq [page (pages)]
-    (fs/delete-if-exists (page/content-html-file page))))
+    (fs/delete-if-exists (page-loader/content-html-file page))))
 
 (comment
   (rebuild!)
