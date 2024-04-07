@@ -11,5 +11,14 @@
        [:a {:href "https://github.com/teodorlu/scicloj-garden-experiment"}
         "github.com/teodorlu/scicloj-garden-experiment"]]])))
 
+(defn pandoc-el->hiccup [el]
+  (cond (= "Para" (:t el))
+        (into [:p] (map pandoc-el->hiccup (:c el)))
+
+        (= "Str" (:t el))
+        (:c el)
+
+        :else nil))
+
 (defn pandoc->hiccup [pandoc]
-  [:p "todo"])
+  (into (list) (map pandoc-el->hiccup (:blocks pandoc))))
