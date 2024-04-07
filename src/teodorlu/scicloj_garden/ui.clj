@@ -18,6 +18,12 @@
         (= "Str" (:t el))
         (:c el)
 
+        (= "Space" (:t el))
+        " "
+
+        (= "Emph" (:t el))
+        (into [:em] (map pandoc-el->hiccup (:c el)))
+
         :else nil))
 
 (defn pandoc->hiccup [pandoc]

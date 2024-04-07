@@ -5,17 +5,9 @@
    [teodorlu.bbmemex.pandoc :as pandoc]
    [teodorlu.scicloj-garden.ui :as ui]))
 
-(comment
-  ;; testing whether we can convert something really simple to html
-
-  (pandoc/from-markdown "hei")
-  {:pandoc-api-version [1 23 1],
-   :meta {},
-   :blocks [{:t "Para", :c [{:t "Str", :c "hei"}]}]}
-  )
-
-(deftest pandoc->hiccup-test
-  (testing "Pandoc strings are strings in hiccup too"
+(deftest pandoc->hiccup-test--string
+  (testing "Pandoc strings are strings in hiccup"
+    ;; (pandoc/from-markdown "hei")
     (let [pandoc
           {:pandoc-api-version [1 23 1],
            :meta {},
@@ -23,7 +15,21 @@
       (is (= (list [:p "hei"])
              (ui/pandoc->hiccup pandoc))))))
 
+(deftest pandoc->hiccup-test--with-space
+  (testing "Spaces in pandoc strings are spaces in hiccup"
+    ;; (pandoc/from-markdown "hei _du_")
+    (let [pandoc
+          {:pandoc-api-version [1 23 1],
+           :meta {},
+           :blocks
+           [{:t "Para",
+             :c
+             [{:t "Str", :c "hei"} {:t "Space"} {:t "Emph", :c [{:t "Str", :c "du"}]}]}]}]
+      (is (= (list [:p "hei" " " [:em "du"]])
+             (ui/pandoc->hiccup pandoc))))))
+
 (comment
+  (ui/pandoc->hiccup (pandoc/from-markdown "hei _du_"))
   ;; generate test data
 
   (def sample-markdown (str/trim "
@@ -66,24 +72,7 @@ A paragraph with _italic text_.
        :c [{:t "Str", :c "italic"} {:t "Space"} {:t "Str", :c "text"}]}
       {:t "Str", :c "."}]}]}
 
-  (pandoc/from-markdown "hei")
-  {:pandoc-api-version [1 23 1],
-   :meta {},
-   :blocks [{:t "Para", :c [{:t "Str", :c "hei"}]}]}
 
-  (pandoc/from-markdown "hei du")
-  {:pandoc-api-version [1 23 1],
-   :meta {},
-   :blocks
-   [{:t "Para", :c [{:t "Str", :c "hei"} {:t "Space"} {:t "Str", :c "du"}]}]}
-
-  (pandoc/from-markdown "hei _du_")
-  {:pandoc-api-version [1 23 1],
-   :meta {},
-   :blocks
-   [{:t "Para",
-     :c
-     [{:t "Str", :c "hei"} {:t "Space"} {:t "Emph", :c [{:t "Str", :c "du"}]}]}]}
 
 
   )
