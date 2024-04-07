@@ -33,6 +33,25 @@ This repository is an attempt to be that home.
 
 ## Design draft 2024
 
+Mental model:
+
+1. The source is text files (markdown) and metadata files (EDN)
+2. An intermediate in-memory representation works as a narrow waist
+   - Document content is Pandoc JSON
+   - Site metadata is a datascript DB
+3. The generated documents are pure HTML, preferrably fast
+   - Extension is done with custom elements that can (optionally) read the metadata files
+   - We want to avoid a big, complex build system for _this repo_
+   - Instead of a big, complex build system, we can try linking generated javascript / clojurescript from other places
+
+Goals:
+
+- We can work on the entire system from a REPL
+- We can _very quickly and easily_ regenerate any files when we have modified content (markdown) or metadata (EDN)
+- We provide a porcelain for links
+
+Notes:
+
 - This repo itself contains the HTML files we push to the web, there is no build step
   - So that we can steal ideas & code from https://github.com/teodorlu/play.teod.eu
 - The input format is Markdown
