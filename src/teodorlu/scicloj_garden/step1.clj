@@ -1,6 +1,8 @@
 (ns teodorlu.scicloj-garden.step1
   (:require
-   [teodorlu.scicloj-garden.ui :as ui]))
+   [teodorlu.scicloj-garden.ui :as ui]
+   [hiccup.page]
+   [babashka.fs :as fs]))
 
 ;; no organization just yet, just try to get started
 ;; not get stuck in analysis paralysis
@@ -19,4 +21,16 @@
 ;;   - Avoid rework (when possible)
 ;; - Avoid using Pandoc for the IR to HTML step
 
-(ui/index {})
+(defn build! []
+  (spit "index.html"
+        (hiccup.page/html5 (ui/index {}))))
+
+(defn clean! []
+  (let [build-artifacts #{"index.html"}]
+    (doseq [f build-artifacts]
+      (fs/delete-if-exists f))))
+
+(comment
+  (build!)
+
+  :rcf)
