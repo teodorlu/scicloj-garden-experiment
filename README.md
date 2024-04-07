@@ -49,6 +49,7 @@ Goals:
 - We can work on the entire system from a REPL
 - We can _very quickly and easily_ regenerate any files when we have modified content (markdown) or metadata (EDN)
 - We provide a porcelain for links
+- Documents link to each other via uuid, and we rewrite to "resovle" those UUIDs.
 
 Notes:
 
