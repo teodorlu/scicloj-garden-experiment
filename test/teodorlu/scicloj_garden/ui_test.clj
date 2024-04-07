@@ -1,26 +1,27 @@
 (ns teodorlu.scicloj-garden.ui-test
   (:require
-   [clojure.string :as str]
-   [clojure.test :refer [deftest is testing]]
+   [clojure.test :refer [deftest is]]
    [teodorlu.bbmemex.pandoc :as pandoc]
    [teodorlu.scicloj-garden.ui :as ui]))
 
 (deftest pandoc->hiccup-test--string
-  ;; (pandoc/from-markdown "hei")
   (let [pandoc
         {:pandoc-api-version [1 23 1],
          :meta {},
          :blocks [{:t "Para", :c [{:t "Str", :c "hei"}]}]}]
+    (is (= pandoc
+           (pandoc/from-markdown "hei")))
     (is (= (list [:p "hei"])
            (ui/pandoc->hiccup pandoc)))))
 
 (deftest pandoc->hiccup-test--with-space
-  ;; (pandoc/from-markdown "hei _du_")
   (let [pandoc
         {:pandoc-api-version [1 23 1],
          :meta {},
          :blocks
          [{:t "Para", :c [{:t "Str", :c "hei"} {:t "Space"} {:t "Str", :c "du"}]}]}]
+    (is (= pandoc
+           (pandoc/from-markdown "hei du")))
     (is (= (list [:p "hei" " " "du"])
            (ui/pandoc->hiccup pandoc)))))
 
