@@ -26,7 +26,6 @@
            (ui/pandoc->hiccup pandoc)))))
 
 (deftest pandoc->hiccup-test--with-space-and-emphasis
-  ;; (pandoc/from-markdown "hei _du_")
   (let [pandoc
         {:pandoc-api-version [1 23 1],
          :meta {},
@@ -34,11 +33,12 @@
          [{:t "Para",
            :c
            [{:t "Str", :c "hei"} {:t "Space"} {:t "Emph", :c [{:t "Str", :c "du"}]}]}]}]
+    (is (= pandoc
+           (pandoc/from-markdown "hei _du_")))
     (is (= (list [:p "hei" " " [:em "du"]])
            (ui/pandoc->hiccup pandoc)))))
 
 (deftest pandoc->hiccup-test--heading
-  ;; (pandoc/from-markdown "# a heading")
   (let [pandoc
         {:pandoc-api-version [1 23 1],
          :meta {},
@@ -48,17 +48,12 @@
            [1
             ["a-heading" [] []]
             [{:t "Str", :c "a"} {:t "Space"} {:t "Str", :c "heading"}]]}]}]
+    (is (= pandoc
+           (pandoc/from-markdown "# a heading")))
     (is (= (list [:h1 "a" " " "heading"])
            (ui/pandoc->hiccup pandoc)))))
 
 (deftest pandoc->hiccup-test--whole-doc
-  #_ (pandoc/from-markdown "
-# Scicloj curriculum map (draft, experimental)
-
-A paragraph.
-
-A paragraph with _italic text_.
-")
   (let [pandoc
         {:pandoc-api-version [1 23 1],
          :meta {},
@@ -88,6 +83,14 @@ A paragraph with _italic text_.
             {:t "Emph",
              :c [{:t "Str", :c "italic"} {:t "Space"} {:t "Str", :c "text"}]}
             {:t "Str", :c "."}]}]}]
+    (is (= pandoc
+           (pandoc/from-markdown "
+# Scicloj curriculum map (draft, experimental)
+
+A paragraph.
+
+A paragraph with _italic text_.
+")))
     (is (= (list [:h1 "Scicloj" " " "curriculum" " " "map" " " "(draft," " " "experimental)"]
                  [:p "A" " " "paragraph."]
                  [:p "A" " " "paragraph" " " "with" " " [:em "italic" " " "text"] "."])
