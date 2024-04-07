@@ -1,7 +1,7 @@
 #+title: Teodor Log
 
 * 2024-04-07
-** a teodor log???
+** about 10:00 a teodor log???
 Yeah, I'd like a place to dump things when I work.
 
 Under no circumstances do you have to read this file in order to understand things!
@@ -21,5 +21,23 @@ I propose:
 
 Assumptions:
 
-1. We use Cloudflare pages like I did last time.
+1. We use Cloudflare pages like I did last time
 2. We do _not_ build a super-duper flexible build system, we stick to simple things.
+** 19:00 I have something working now
+status:
+
+we're live on the web,
+https://scicloj-garden-experiment.pages.dev/
+
+I've hand-rolled a pandoc to hiccup converter.
+Whether that's a good idea remains to be seen.
+
+We're not too far away from an actually useful index to back a curriculum map.
+Known missing pieces:
+
+1. An ergonomic way to add new documents
+2. An ergonomic way to link between documents
+3. Link rewriting (turn uuids into hrefs)
+
+but I think this might work.
+We'll see.
