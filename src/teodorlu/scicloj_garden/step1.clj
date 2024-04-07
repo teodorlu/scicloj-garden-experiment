@@ -31,17 +31,28 @@
   "Traverse the files to find the pages"
   []
   (->> (fs/glob "." "**/page.edn")
-       (map page/edn-file->slug+meta)))
+       (map page/edn-file->page)))
 
 (comment
   (pages)
+  (page/doc-markdown (first (pages)))
 
 
   )
 
-(defn build! []
+(defn rebuild-index! []
   (spit "index.html"
         (hiccup.page/html5 (ui/index {}))))
+
+(defn rebuild-page! [page]
+  )
+
+(defn rebuild!
+  "Rebuilds everything -- no caching behavior."
+  []
+  (rebuild-index!)
+  (doseq [page (pages)]
+    (rebuild-page! page)))
 
 (defn clean! []
   (let [build-artifacts #{"index.html"}]
@@ -49,7 +60,7 @@
       (fs/delete-if-exists f))))
 
 (comment
-  (build!)
+  (rebuild!)
   (clean!)
 
   :rcf)

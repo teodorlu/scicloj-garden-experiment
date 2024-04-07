@@ -40,5 +40,5 @@
   com.hyperfiddle/rcf {:mvn/version "20220926-202227"}
   }
  :aliases
- {:test {:extra-deps {lambdaisland/kaocha {:mvn/version "1.88.1376"}}
-         :main-opts ["-m" "kaocha.runner"]}}}
+ {:kaocha {:extra-deps {lambdaisland/kaocha {:mvn/version "1.88.1376"}}
+           :main-opts ["-m" "kaocha.runner"]}}}
