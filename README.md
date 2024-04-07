@@ -5,7 +5,7 @@
 This repo attempts to build a knowledge garden for scicloj out of hypertext, clojure and markdown.
 We don't know (yet) whether that will succeed.
 
-## Context: Teodor believes in memexes built out of hypertext, and that the clojure data science community could use a memex to help with workflow discovery
+## Teodor believes in memexes built out of hypertext, and that the clojure data science community could use a memex to help with workflow discovery
 
 Teodor believes that babashka and files is a good foundation for building a memex.
 He has argued that point on Babashka-conf 2023:
