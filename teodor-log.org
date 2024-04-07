@@ -1,0 +1,25 @@
+#+title: Teodor Log
+
+* 2024-04-07
+** a teodor log???
+Yeah, I'd like a place to dump things when I work.
+
+Under no circumstances do you have to read this file in order to understand things!
+** where to start??
+Clojure camp thread on Slack:
+
+https://clojurians.slack.com/archives/C0BQDEJ8M/p1711971630025459
+
+Teodor curriculum map draft:
+
+https://play.teod.eu/currmap-clojure-data-science-draft/currmap
+** so, where to start?
+I propose:
+
+1. We copy the EDN file over
+2. We setup a minimal structure to deploy that same page from this repo
+
+Assumptions:
+
+1. We use Cloudflare pages like I did last time.
+2. We do _not_ build a super-duper flexible build system, we stick to simple things.
