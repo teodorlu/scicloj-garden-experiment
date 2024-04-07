@@ -31,6 +31,7 @@ https://scicloj-garden-experiment.pages.dev/
 
 I've hand-rolled a pandoc to hiccup converter.
 Whether that's a good idea remains to be seen.
+We can still choose pandoc to convert to html, but then that html is a string, not data.
 
 We're not too far away from an actually useful index to back a curriculum map.
 Known missing pieces:
