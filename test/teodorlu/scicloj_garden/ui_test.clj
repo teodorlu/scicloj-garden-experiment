@@ -36,6 +36,22 @@
     (is (= (list [:p "hei" " " [:em "du"]])
            (ui/pandoc->hiccup pandoc)))))
 
+(deftest pandoc->hiccup-test--heading
+  ;; (pandoc/from-markdown "# a heading")
+  (let [pandoc
+        {:pandoc-api-version [1 23 1],
+         :meta {},
+         :blocks
+         [{:t "Header",
+           :c
+           [1
+            ["a-heading" [] []]
+            [{:t "Str", :c "a"} {:t "Space"} {:t "Str", :c "heading"}]]}]}]
+    (is (= (list [:h1 "a" " " "heading"])
+           (ui/pandoc->hiccup pandoc)))))
+
+
+
 (comment
   (ui/pandoc->hiccup (pandoc/from-markdown "hei _du_"))
   ;; generate test data
