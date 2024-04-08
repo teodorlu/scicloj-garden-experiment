@@ -1,4 +1,4 @@
-**⚠️ THIS PROJECT IS HIGHLY EXPERIMENTAL, PROCEED AT YOUR OWN RISK ⚠️**
+**⚠️ THIS PROJECT IS HIGHLY EXPERIMENTAL⚠️**
 
 https://scicloj-garden-experiment.pages.dev/
 
