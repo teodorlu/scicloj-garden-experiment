@@ -96,7 +96,7 @@ Here's a proposal:
 
 Teodor believes "make a curriculum" is a good start because it's a _complete_ goal.
 
-## What about Kira's book and other attempts?
+## What about Kira's book and other initiatives?
 
 Teodor believes that there's no reason not to do _multiple_ initiatives for this.
 Also, a book is way more cohesive than a memex.
