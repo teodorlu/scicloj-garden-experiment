@@ -5,6 +5,7 @@
    hiccup.page
    [teodorlu.bbmemex.pandoc :as pandoc]
    [teodorlu.scicloj-garden.page :as page]
+   [teodorlu.scicloj-garden.pandoc2hiccup :as pandoc2hiccup]
    [teodorlu.scicloj-garden.ui :as ui]))
 
 ;; TODO
@@ -65,7 +66,7 @@
   (when (has-content-markdown? page)
     (when-let [html (some-> (content-markdown page)
                             (pandoc/from-markdown)
-                            ui/pandoc->hiccup
+                            pandoc2hiccup/pandoc2hiccup
                             hiccup.page/html5)]
       (spit (content-html-file page) (str html "\n"))
       ::page-rebuild-complete)))

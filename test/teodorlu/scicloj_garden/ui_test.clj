@@ -2,7 +2,7 @@
   (:require
    [clojure.test :refer [deftest is]]
    [teodorlu.bbmemex.pandoc :as pandoc]
-   [teodorlu.scicloj-garden.ui :as ui]))
+   [teodorlu.scicloj-garden.pandoc2hiccup :as pandoc2hiccup]))
 
 (deftest pandoc->hiccup-test--string
   (let [pandoc
@@ -12,7 +12,7 @@
     (is (= pandoc
            (pandoc/from-markdown "hei")))
     (is (= (list [:p "hei"])
-           (ui/pandoc->hiccup pandoc)))))
+           (pandoc2hiccup/pandoc2hiccup pandoc)))))
 
 (deftest pandoc->hiccup-test--with-space
   (let [pandoc
@@ -23,7 +23,7 @@
     (is (= pandoc
            (pandoc/from-markdown "hei du")))
     (is (= (list [:p "hei" " " "du"])
-           (ui/pandoc->hiccup pandoc)))))
+           (pandoc2hiccup/pandoc2hiccup pandoc)))))
 
 (deftest pandoc->hiccup-test--with-space-and-emphasis
   (let [pandoc
@@ -36,7 +36,7 @@
     (is (= pandoc
            (pandoc/from-markdown "hei _du_")))
     (is (= (list [:p "hei" " " [:em "du"]])
-           (ui/pandoc->hiccup pandoc)))))
+           (pandoc2hiccup/pandoc2hiccup pandoc)))))
 
 (deftest pandoc->hiccup-test--heading
   (let [pandoc
@@ -51,7 +51,7 @@
     (is (= pandoc
            (pandoc/from-markdown "# a heading")))
     (is (= (list [:h1 "a" " " "heading"])
-           (ui/pandoc->hiccup pandoc)))))
+           (pandoc2hiccup/pandoc2hiccup pandoc)))))
 
 (deftest pandoc->hiccup-test--whole-doc
   (let [pandoc
@@ -94,4 +94,4 @@ A paragraph with _italic text_.
     (is (= (list [:h1 "Scicloj" " " "curriculum" " " "map" " " "(draft," " " "experimental)"]
                  [:p "A" " " "paragraph."]
                  [:p "A" " " "paragraph" " " "with" " " [:em "italic" " " "text"] "."])
-           (ui/pandoc->hiccup pandoc)))))
+           (pandoc2hiccup/pandoc2hiccup pandoc)))))
