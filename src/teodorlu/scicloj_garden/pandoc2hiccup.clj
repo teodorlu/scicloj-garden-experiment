@@ -1,4 +1,7 @@
-(ns teodorlu.scicloj-garden.pandoc2hiccup)
+(ns teodorlu.scicloj-garden.pandoc2hiccup
+  (:require
+   pandocir.hiccup
+   pandocir.ir))
 
 (defn ^:private pandoc-el->hiccup [el]
   (cond (= "Para" (:t el))
@@ -23,5 +26,19 @@
 (defn ^:private pandoc->hiccup [pandoc]
   (apply list (map pandoc-el->hiccup (:blocks pandoc))))
 
-(defn pandoc2hiccup [pandoc]
+(defn ir->hiccup [ir]
+  (->> ir
+       pandocir.hiccup/ir->hiccup
+       :blocks
+       (apply list)))
+
+(defn pandoc->hiccup-old [pandoc]
   (pandoc->hiccup pandoc))
+
+(defn pandoc->hiccup-new [pandoc]
+  (-> pandoc
+      pandocir.ir/pandoc->ir
+      ir->hiccup))
+
+(defn pandoc2hiccup [pandoc]
+  (pandoc->hiccup-old pandoc))
