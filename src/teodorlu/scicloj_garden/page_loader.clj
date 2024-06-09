@@ -66,7 +66,7 @@
   (when (has-content-markdown? page)
     (when-let [html (some-> (content-markdown page)
                             (pandoc/from-markdown)
-                            pandoc2hiccup/pandoc2hiccup
+                            pandoc2hiccup/pandoc->hiccup
                             hiccup.page/html5)]
       (spit (content-html-file page) (str html "\n"))
       ::page-rebuild-complete)))
