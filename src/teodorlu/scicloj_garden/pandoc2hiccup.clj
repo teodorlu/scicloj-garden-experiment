@@ -24,7 +24,6 @@
 
         :else nil))
 
-#_{:clj-kondo/ignore [:unused-private-var]}
 (defn ^:private pandoc->hiccup-old [pandoc]
   (apply list (map pandoc-el->hiccup-old (:blocks pandoc))))
 
@@ -49,7 +48,6 @@
        (apply list)
        strip-hiccup-header-attrs))
 
-#_{:clj-kondo/ignore [:unused-private-var]}
 (defn ^:private pandoc->hiccup-new [pandoc]
   (-> pandoc
       pandocir.ir/pandoc->ir
