@@ -44,8 +44,6 @@
 (deftest convert-test
   (is (= "<p><em>teodor</em></p>" (-> "_teodor_" pandoc/from-markdown pandoc/to-html str/trim))))
 
-(def heart-of-clojure-yay-markdown
-  "heart of clojure *yay*")
 (def heart-of-clojure-yay-raw-pandoc
   {:pandoc-api-version [1 23 1],
    :meta {},
@@ -59,6 +57,10 @@
       {:t "Str", :c "clojure"}
       {:t "Space"}
       {:t "Emph", :c [{:t "Str", :c "yay"}]}]}]})
+
+(deftest pandoc-parse-markdown-test
+  (is (= (-> "heart of clojure *yay*" pandoc/from-markdown)
+         heart-of-clojure-yay-raw-pandoc)))
 
 (def heart-of-clojure-yay-pandocir
   {:pandoc-api-version [1 23 1],
@@ -75,6 +77,10 @@
       {:pandocir/type :pandocir.type/emph,
        :pandocir/inlines
        [{:pandocir/type :pandocir.type/str, :pandocir/text "yay"}]}]}]})
+
+(deftest pandocir-test
+  (is (= heart-of-clojure-yay-pandocir
+         (-> heart-of-clojure-yay-raw-pandoc pandocir.ir/pandoc->ir))))
 
 (defn ir->hiccup [ir]
   (->> ir
