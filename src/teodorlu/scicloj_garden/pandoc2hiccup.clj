@@ -18,7 +18,7 @@
         (into [:em] (map pandoc-el->hiccup-old (:c el)))
 
         (= "Header" (:t el))
-        (let [header-tag (get {1 :h1 2 :h2 3 :h3 4 :h4 5 :h5 6 :h6}
+        (when-let [header-tag (get {1 :h1 2 :h2 3 :h3 4 :h4 5 :h5 6 :h6}
                               (first (:c el)))]
           (into [header-tag] (map pandoc-el->hiccup-old (get (:c el) 2))))
 
