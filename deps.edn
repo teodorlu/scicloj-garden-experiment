@@ -1,13 +1,13 @@
 {:paths ["src"         #_ "our code"
          "src-bbmemex" #_ "library code that isn't in a lib yet"]
  :deps
- {babashka/fs {:mvn/version "0.5.21"},
-  babashka/process {:mvn/version "0.5.22"},
-  cheshire/cheshire {:mvn/version "5.13.0"},
-  hiccup/hiccup {:mvn/version "2.0.0-RC1"},
+ {babashka/fs {:mvn/version "0.5.21"}
+  babashka/process {:mvn/version "0.5.22"}
+  cheshire/cheshire {:mvn/version "5.13.0"}
+  hiccup/hiccup {:mvn/version "2.0.0-RC1"}
   org.clojure/clojure {:mvn/version "1.11.3"}
   io.github.teodorlu/pandocir {:git/url "https://github.com/teodorlu/pandocir"
-                               :git/sha "f5a4ab080e827dfb17f7a8b5e28a75b9b1918925"},}
+                               :git/sha "0b15dc8bb8417320b9bf09c9b715bfb40aaf23f3"}}
  :aliases
  {:kaocha {:extra-deps {lambdaisland/kaocha {:mvn/version "1.91.1392"}}
            :main-opts ["-m" "kaocha.runner"]}}}
