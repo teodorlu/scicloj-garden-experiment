@@ -40,5 +40,5 @@
       pandocir.ir/pandoc->ir
       ir->hiccup))
 
-(defn pandoc2hiccup [pandoc]
+(defn pandoc->hiccup [pandoc]
   (pandoc->hiccup-old pandoc))
