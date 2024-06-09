@@ -63,10 +63,10 @@
 
 (defn force-rebuild! [page]
   (when (has-content-markdown? page)
-    (when-let [html (or (some-> (content-markdown page)
-                                (pandoc/from-markdown)
-                                ui/pandoc->hiccup
-                                hiccup.page/html5))]
+    (when-let [html (some-> (content-markdown page)
+                            (pandoc/from-markdown)
+                            ui/pandoc->hiccup
+                            hiccup.page/html5)]
       (spit (content-html-file page) (str html "\n"))
       ::page-rebuild-complete)))
 
