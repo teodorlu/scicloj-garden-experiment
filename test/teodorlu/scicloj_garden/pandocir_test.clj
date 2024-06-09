@@ -1,48 +1,9 @@
 (ns teodorlu.scicloj-garden.pandocir-test
   (:require
-   [clojure.test :refer [deftest is testing]]
-   [clojure.string :as str]
+   [clojure.test :refer [deftest is]]
    [teodorlu.bbmemex.pandoc :as pandoc]
    [pandocir.ir]
    [pandocir.hiccup]))
-
-;; I'm writing some test cases to see if I can understand how teodorlu/pandocir works now.
-
-(deftest two
-  (is (= 2 (+ 1 1)))
-  (is (= 3 (+ 1 1 1))))
-
-#_
-(-> "heart of clojure *yay*"
-    pandoc/from-markdown)
-
-
-(deftest markdown-test
-  (testing "markdown-> output looks like sane pandoc json"
-    (let [markdown "hei\npå deg!"]
-      (is (map? (pandoc/from-markdown markdown)))
-      (is (contains? (pandoc/from-markdown markdown)
-                     :pandoc-api-version))))
-  (testing "we can roundtrip from and to markdown"
-    (let [markdown "hei\n\npå deg!\n"]
-      (is (= markdown
-             (-> markdown
-                 pandoc/from-markdown
-                 pandoc/to-markdown)))))
-  (testing "but roundtripping only works exactly with a single trailing newline"
-    (let [markdown-no-newline "hei\n\npå deg!"]
-      (is (not= markdown-no-newline
-                (-> markdown-no-newline
-                    pandoc/from-markdown
-                    pandoc/to-markdown))))
-    (let [markdown-two-newlines "hei\n\npå deg!\n\n"]
-      (is (not= markdown-two-newlines
-                (-> markdown-two-newlines
-                    pandoc/from-markdown
-                    pandoc/to-markdown))))))
-
-(deftest convert-test
-  (is (= "<p><em>teodor</em></p>" (-> "_teodor_" pandoc/from-markdown pandoc/to-html str/trim))))
 
 (def heart-of-clojure-yay-raw-pandoc
   {:pandoc-api-version [1 23 1],
