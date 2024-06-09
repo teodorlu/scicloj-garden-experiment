@@ -5,8 +5,7 @@
    hiccup.page
    [teodorlu.bbmemex.pandoc :as pandoc]
    [teodorlu.scicloj-garden.page :as page]
-   [teodorlu.scicloj-garden.pandoc2hiccup :as pandoc2hiccup]
-   [teodorlu.scicloj-garden.ui :as ui]))
+   [teodorlu.scicloj-garden.pandoc2hiccup :as pandoc2hiccup]))
 
 ;; TODO
 ;;
