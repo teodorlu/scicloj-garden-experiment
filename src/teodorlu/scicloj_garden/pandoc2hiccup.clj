@@ -1,7 +1,8 @@
 (ns teodorlu.scicloj-garden.pandoc2hiccup
   (:require
    pandocir.hiccup
-   pandocir.ir))
+   pandocir.ir
+   clojure.walk))
 
 (defn ^:private pandoc-el->hiccup-old [el]
   (cond (= "Para" (:t el))
@@ -27,11 +28,26 @@
 (defn ^:private pandoc->hiccup-old [pandoc]
   (apply list (map pandoc-el->hiccup-old (:blocks pandoc))))
 
+(defn ^:private strip-hiccup-header-attrs [hiccup]
+  (let [hiccup-node? (fn [node]
+                       (and (vector? node)
+                            (keyword? (first node))))
+        strip-attrs (fn [[tag maybe-attrs children]]
+                      (if (map? maybe-attrs)
+                        (into [tag] children)
+                        (into [tag maybe-attrs] children)))]
+    (clojure.walk/postwalk (fn [node]
+                             (if (hiccup-node? node)
+                               (strip-attrs node)
+                               node))
+                           hiccup)))
+
 (defn ^:private ir->hiccup [ir]
   (->> ir
        pandocir.hiccup/ir->hiccup
        :blocks
-       (apply list)))
+       (apply list)
+       strip-hiccup-header-attrs))
 
 #_{:clj-kondo/ignore [:unused-private-var]}
 (defn ^:private pandoc->hiccup-new [pandoc]
