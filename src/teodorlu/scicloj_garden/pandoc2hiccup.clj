@@ -32,7 +32,7 @@
   (let [hiccup-node? (fn [node]
                        (and (vector? node)
                             (keyword? (first node))))
-        strip-attrs (fn [[tag maybe-attrs children]]
+        strip-attrs (fn [[tag maybe-attrs & children]]
                       (if (map? maybe-attrs)
                         (into [tag] children)
                         (into [tag maybe-attrs] children)))]
@@ -56,4 +56,4 @@
       ir->hiccup))
 
 (defn pandoc->hiccup [pandoc]
-  (pandoc->hiccup-old pandoc))
+  (pandoc->hiccup-new pandoc))
